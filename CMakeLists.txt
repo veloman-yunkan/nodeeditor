@@ -70,6 +70,12 @@ set(CPP_SOURCE_FILES
   src/StyleCollection.cpp
 )
 
+if(BUILD_SHARED_LIBS)
+    set(NODE_EDITOR_DEFINITIONS NODE_EDITOR_SHARED)
+else()
+    set(NODE_EDITOR_DEFINITIONS NODE_EDITOR_STATIC)
+endif()
+
 # If we want to give the option to build a static library,
 # set BUILD_SHARED_LIBS option to OFF
 add_library(nodes
@@ -98,7 +104,7 @@ target_link_libraries(nodes
 target_compile_definitions(nodes
   PUBLIC
     ${Qt5Widgets_DEFINITIONS}
-    NODE_EDITOR_SHARED
+    ${NODE_EDITOR_DEFINITIONS}
   PRIVATE
     NODE_EDITOR_EXPORTS
     #NODE_DEBUG_DRAWING
